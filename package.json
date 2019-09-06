@@ -1,0 +1,30 @@
+{
+  "name": "web3js-sdk",
+  "version": "0.0.1",
+  "description": "MicroPayment Web3js",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ppn:pangolin-lab/web3js-sdk.git"
+  },
+  "author": "Develop-team",
+  "license": "MIT",
+  "dependencies": {
+    "fast-date-format": "^2.2.3",
+    "web3": "^1.2.1"
+  },
+  "devDependencies": {
+    "bestzip": "^2.1.4",
+    "browserify": "^16.5.0",
+    "browserify-shim": "^3.8.14",
+    "lite-server": "^2.5.4",
+    "shelljs": "^0.8.3",
+    "watchify": "^3.11.1"
+  }
+}
