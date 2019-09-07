@@ -1,6 +1,5 @@
-const AbiHandler = require('../src/lib/init/abihandler.js');
+const AbiHandler = require('../src/lib/utils/abihandler.js');
 
 var abiHandler = new AbiHandler('src/contracts/initabis');
 abiHandler.generatorABI('s');
-console.log('>>>>>>');
 console.log(abiHandler.getCtx());
