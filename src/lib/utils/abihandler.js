@@ -11,7 +11,7 @@
  *
  */
 "use strict";
-const DEF_CONTRACTS_SRC = "src/contracts";
+const DEF_CONTRACTS_SRC = "build/contracts";
 const DEF_TARGET_SRC = "data/abis";
 const DEF_TARGET_ABI = "core-abi.json";
 
@@ -62,7 +62,6 @@ class AbiHandler {
       }
     }
 
-    //console.log(JSON.stringify(coreABIs,null,'  '));
     fs.writeFile(this.ctx['coreabi'],JSON.stringify(coreABIs,null,'  '),err=>{
       if(err)console.log(err);
     });

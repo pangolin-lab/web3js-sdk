@@ -61,6 +61,7 @@ typings/
 .next
 
 # project ignore
+.env
 dest
 tmp
 build
