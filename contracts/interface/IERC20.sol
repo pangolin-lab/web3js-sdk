@@ -1,7 +1,7 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 interface IERC20 {
-	function totalSupport() external view returns(uint256);
+	function totalSupply() external view returns(uint256);
 
 	function balanceOf(address who)external view returns(uint256 balance);
 
