@@ -18,11 +18,11 @@ const C = {
  	domain:"infura.io",
  	protocol:"https",
  	networks:[
- 	{id:1,name:"Mainnet"},
- 	{id:3,name:"Ropsten"},
- 	{id:4,name:"Rinkeby"},
- 	{id:42,name:"kovan"},
- 	{id:5,name:"goerli"} 
+ 	  {id:1,name:"Mainnet"},
+ 	  {id:3,name:"Ropsten"},
+ 	  {id:4,name:"Rinkeby"},
+ 	  {id:42,name:"kovan"},
+ 	  {id:5,name:"goerli"} 
  	],
  	supportProts:"https wss ipfs"
 };
@@ -41,6 +41,10 @@ function _getProtocol(prot){
  	return C.protocol;
 }
 
+/**
+ *
+ *
+ */
 function InfuraHandler(options) {
 	let ctx = {
  		version:C.version,

@@ -1,7 +1,11 @@
 {
 	"port": 8900,
 	"bind": "localhost",
-	"files": ["./public/**/*.{html,htm,css,js}"],
+	"files": [
+		"./public/**/*.{html,htm,css,js}",
+		"./src/**/*.{js,html,css}",
+		"./build/**/*.{js,html,css}"
+	],
 	"index": "demo.html",
 	"server": [
 		"./build",
@@ -10,9 +14,9 @@
 	],
 	"watchexps"	: [
 		"public/**.js # # reload",
-		"src/** # echo wow! # reload",
 		"public/**.css # # reloadcss",
-		"public/**.html # # reload"
+		"public/**.html # # reload",
+		"build/**.js # echo wow # reload"
 	],
 	"interval" 	: 500,
 	"delay"		: 1000,
