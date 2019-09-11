@@ -2,12 +2,15 @@
   "name": "web3js-sdk",
   "version": "0.0.1",
   "description": "MicroPayment Web3js",
-  "main": "src/index.js",
+  "main": "truffle-config.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "deploy-demo":"truffle migrate --network development",
+    "clean:web":"rm -rf build/*",
+    "clean:sol":"rm -rf .output/demo",
+    "demo-deploy": "truffle migrate --network development",
+    "demo-mix":"node bin/integrate-abi.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,12 +21,14 @@
   "license": "MIT",
   "dependencies": {
     "fast-date-format": "^2.2.3",
+    "jquery": "^3.4.1",
     "web3": "^1.2.1"
   },
   "devDependencies": {
     "bestzip": "^2.1.4",
     "browserify": "^16.5.0",
     "browserify-shim": "^3.8.14",
+    "commander": "^3.0.1",
     "dotenv": "^8.1.0",
     "lite-server": "^2.5.4",
     "shelljs": "^0.8.3",

@@ -11,32 +11,59 @@
  *
  */
 "use strict";
-const DEF_CONTRACTS_SRC = "build/contracts";
+const DEF_CONTRACTS_SRC = ".output";
 const DEF_TARGET_SRC = "data/abis";
 const DEF_TARGET_ABI = "core-abi.json";
+
 
 var fs = require('fs');
 var path = require('path');
 var sh = require('shelljs');
 
+const DEF = {
+  abiSrc:"build/contracts",
+  targetDest:"data/abis",
+  targetABI:"core-abi.json"
+};
+
 class AbiHandler {
   
+  /**
+   * options string set abiSrc
+   * options object Json
+   *
+   */
   constructor (options) {
+    this.version = '0.0.1';
   	this.ROOT_HOME = process.cwd();
-  	this.ctx ={};
-  	if(typeof options === 'string'){
-  	  this.ctx['abiSrc'] = _getABISource(options);
-  	}
+  	this.ctx =Object.assign({},DEF);
 
-  	if(!fs.existsSync(this.ctx['abiSrc'])){
+  	if(typeof options === 'string'){
+  	  _setABISrc(this.ctx,options);
+  	}else if(typeof options === 'object'){
+      if(typeof options.abiSrc === 'string')
+        _setABISrc(this.ctx,options.abiSrc);
+
+      if(typeof options.targetDest ==='string')
+        _setTargetDest(this.ctx,options.targetDest);
+
+      if(typeof options.targetABI ==='string')
+        _setTargetABI(this.ctx,options.targetABI);
+    }else{
+      console.log('options invalid,initial instance used default.');
+    }
+
+  	if(!fs.existsSync(this.ctx.abiSrc)){
   	  console.log("Contracts:"+this.ctx['abiSrc']);
-  	  console.log("contracts abi directory not exists."+process.cwd());
+  	  console.log("contracts abi directory not exists."+
+        path.join(process.cwd(),this.ctx.abiSrc));
   	  //process.exit(1);
   	}
-    if(!fs.existsSync(DEF_TARGET_SRC)){
-      sh.mkdir('-p',DEF_TARGET_SRC);
+    if(!fs.existsSync(this.ctx.targetDest)){
+      sh.mkdir('-p',this.ctx.targetDest);
     }
-  	this.ctx['coreabi'] = path.join(DEF_TARGET_SRC,DEF_TARGET_ABI);
+  	this.ctx['coreabi'] = path.join(this.ctx.targetDest,this.ctx.targetABI);
+
   }
 
   generatorABI(cover){
@@ -72,12 +99,25 @@ class AbiHandler {
   }
 }
 
-/**
- *
- */
-function _getABISource(p){
-  return p == null ?  DEF_CONTRACTS_SRC : p;
+function _setABISrc(ctx,src){
+  if(src.trim().length >0){
+    ctx.abiSrc = src.trim();
+  }
 }
+
+function _setTargetDest(ctx,dest){
+  if(typeof dest ==='string' && dest.trim()>0){
+    ctx.targetDest = dest.trim();
+  }
+}
+
+function _setTargetABI(ctx,target){
+  if(typeof target ==='string' && target.endsWith('.json')){
+    ctx.targetABI = target;
+  }
+}
+
+
 
 function _loadABIFiles(p){
   return fs

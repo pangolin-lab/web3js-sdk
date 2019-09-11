@@ -66,3 +66,6 @@ dest
 tmp
 build
 .pri-*.*
+
+# contracts ABIs
+.abis
