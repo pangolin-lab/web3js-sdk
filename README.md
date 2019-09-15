@@ -9,8 +9,7 @@
 
 > deployed the demo contracts to local ganache env.
 
-  * first start ganache and config workspace ,local port
-  * update local port to truffle config file ：truffle-config.js
-  * open terminal execute this command: npm run demo-deploy
+  - first start ganache and config workspace ,local port
+  - update local port to truffle config file ：truffle-config.js
+  - open terminal execute this command: npm run demo-deploy
 
-  
