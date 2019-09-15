@@ -17,9 +17,9 @@ const ContractsManager = require('./lib/contracts-manager.js');
 const C = {
 	version:"0.0.1",
 	addresses:[
-		"SafeMath:0xA3AA394608f2C94e8492dE8A983176D040c14aDe",
-		"owned:0xE229B26d01a1A715419BC54ec17792D832772495",
-		"LaferraiCoin:0x1E10164CAff78701e3F08f6257feEf4D852f5682"
+		"SafeMath:0x75427b17f5cbD943e7dFe5a518b0f2842cD57FC7",
+		"owned:0x321aFCB05a205f6AfE28d9D259461bbfa6b6a13b",
+		"LaferraiCoin:0xeE9DFd4691d7f897086408697ebB3994E89fd253"
 	]
 }
 

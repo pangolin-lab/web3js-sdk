@@ -7,9 +7,12 @@
 
 ## Ganache Local Demo Deployed
 
-> deployed the demo contracts to local ganache env.
+> Deployed the demo contracts to local ganache env.
 
-  - first start ganache and config workspace ,local port
+  - first start ganache and config workspace ,local port 7545
   - update local port to truffle config file ：truffle-config.js
   - open terminal execute this command: npm run demo-deploy
+
+> If you modified the demo contracts file,you need mix contracts abi,used command : npm run demo-mix
+
 
