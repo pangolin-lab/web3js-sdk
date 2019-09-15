@@ -7,7 +7,10 @@
 
 ## Ganache Local Demo Deployed
 
+> deployed the demo contracts to local ganache env.
 
+  * first start ganache and config workspace ,local port
+  * update local port to truffle config file ：truffle-config.js
+  * open terminal execute this command: npm run demo-deploy
 
-https://img.shields.io/endpoint?url=https://s4.aconvert.com/convert/p3r68-cdx67/br6rf-bq7yr.svg
-https://avatars-05.gitter.im/group/iv/3/57542d68c43b8c601977c6d4
+  
