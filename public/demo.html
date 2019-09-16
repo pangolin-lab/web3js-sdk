@@ -19,10 +19,20 @@
 	
 	<section class="balance-section" id="balance-section">
 		<div class="container">
+			<div class="justify-content-center">
+				<div class="form-group row">
+					<label for="network" class="form-label col-2">Connected To</label>
+					<input type="text" class="form-control-plaintext col-4" readonly="readonly" name="network" value="">
+					<label for="gasPrice" class="form-label col-2">Gas Price</label>
+					<input type="text" name="gasPrice" class="form-control-plaintext col-4" readonly="readonly" value="0.00">					
+				</div>					
+			</div>
+							
 			<form action="#" class="form-row">
+				
 				<div class="form-group col-6">
 					<label for="accountAddress " class="form-label">Address</label>
-					<input class="form-control" type="text" name="accountAddress">
+					<input class="form-control" type="text" name="accountAddress" id="accountAddress" value="0xab09">
 				</div>
 				<div class="form-group col-6">
 					<label class="form-label" for="accountBalance">balance</label>
@@ -64,5 +74,6 @@
 	<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/demo-app-bundle.js"></script>
+	<script type="text/javascript" src="js/demo-app.js"></script>
 </body>
 </html>

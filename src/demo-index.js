@@ -1,5 +1,5 @@
 /**
- * MetaMask Support
+ * demo-index
  *  |\_/|,,_____,~~`
  *  (.".)~~     )`~}}
  *	 \o/\ /---~\\ ~}}
@@ -13,13 +13,11 @@
 'use strict';
 var jquery = require('jquery');
 
-const ContractsManager = require('./lib/contracts-manager.js');
-
 const MetaMaskSdk = require('./lib/metamask-extends.js');
 
 //const SDKCore = require('./sdk-core.js');
 
-global.BrowserInfo = require('./lib/utils/browserhandler.js');
+let BrowserInfo = require('./lib/utils/browserhandler.js');
 const C = {
 	addresses:[
 		"SafeMath:0x75427b17f5cbD943e7dFe5a518b0f2842cD57FC7",
@@ -28,40 +26,31 @@ const C = {
 	]	
 }
 
-let ABI = _loadABI("abis/demo-abi.json");
-global.ABIManager = new ContractsManager(ABI,C.addresses);	
-global.sdkCore = new MetaMaskSdk();
+const PS = {
+	appName:"Web3 SDK Demo",
+	accAddrTagName:"accountAddress"
+};
 
-class Demo {
-	constructor(options){
-		this.version= sdkCore.version;
-		this.ctx = {};
+var DemoApp = {
+	sdkCore:null,
+	init:(sdk)=>{
+		DemoApp.sdkCore;
+		console.log('>>>');
+		$('#'+PS.accAddrTagName+'').val(sdkCore.selectAddress);
+		console.log('>>>2');
 	}
 }
 
-global.demoInstance = new Demo('Demo-abi');
 
-console.log("Version:",demoInstance.version);
 
-/* =============== INNER METHOD ================ */
-/**
- * load ABI Json File
- */
-function _loadABI(u){
-	let ts = new Date().getTime();
-	let json = {};
-	$.ajax({
-		type:"GET",
-		url:u,
-		async:false,
-		dataType:"json",
-		success:data => {
-			json = data;
-		},
-		error:(xmlReq,status,err) => {
-			console.log('Get JSON Error>',status,err);
-		}
+
+
+$(function(){
+	$(window).on('load',function(){
+		let sdkCore = new MetaMaskSdk(DemoApp);
+		console.log("SDK Version:",sdkCore.version);
 	});
+});
 
-	return json;
-}
+
+

@@ -1,5 +1,5 @@
 /**
- * MetaMask Support
+ * metamask-extends
  *  |\_/|,,_____,~~`
  *  (.".)~~     )`~}}
  *	 \o/\ /---~\\ ~}}
@@ -11,7 +11,10 @@
  *
  */
 'use strict';
+const Web3 = require('web3');
+const ContractsManager = require('./contracts-manager.js');
 const SdkError = require('./exceptions/sdk-exceptions.js');
+
 const C = {
 	version:"0.0.1",
 	addresses:[
@@ -20,10 +23,14 @@ const C = {
 		"LaferraiCoin:0xeE9DFd4691d7f897086408697ebB3994E89fd253"
 	]	
 }
+
+let ABI = _loadABI("abis/demo-abi.json");
+let ABIManager = new ContractsManager(ABI,C.addresses);	
+
 class MetaMaskSdk {
-	constructor(options){
+	constructor(app){
 		this.version = C.version;
-		_checkMetamask(this);
+		this.initStat = _checkMetamask(this) ? 'success' :'failure'; 
 	}
 }
 
@@ -33,21 +40,44 @@ async function _checkMetamask(that){
 		web3Provider = window.ethereum;
 		that.isMetaMask = window.ethereum.isMetaMask;
 		try{
-			that.ethereumEnabled = await window.ethereum.enable();
-
-			return web3Provider;
+			await window.ethereum.enable();
 		}catch(error){
 			console.log(error.message);
 			throw new SdkError('100001',error.message);
 		}
 	}else if(window.web3){
-		return window.web3.currentProvider;
+		web3Provider = window.web3.currentProvider;
 	}else{
 		throw new SdkError('100000');
 		//return new Web3.providers.HttpProvider(that.currentProviderUrl);
 	}
+	
+	that.selectAddress = web3Provider.selectedAddress ||'';
+	that.currentProvider = new Web3(web3Provider);
+	return true;
 }
 
+/* =============== INNER METHOD ================ */
+/**
+ * load ABI Json File
+ */
+function _loadABI(u){
+	let ts = new Date().getTime();
+	let json = {};
+	$.ajax({
+		type:"GET",
+		url:u,
+		async:false,
+		dataType:"json",
+		success:data => {
+			json = data;
+		},
+		error:(xmlReq,status,err) => {
+			console.log('Get JSON Error>',status,err);
+		}
+	});
 
+	return json;
+}
 
 module.exports = MetaMaskSdk;
