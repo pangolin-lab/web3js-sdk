@@ -92,5 +92,6 @@ function _parseAddress(networks){
 	return address;
 }
 
+
 module.exports=ContractsManager;
 

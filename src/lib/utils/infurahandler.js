@@ -52,37 +52,39 @@ function InfuraHandler(options) {
  		protocol:C.protocol
  	};
 
-  	/**
-   	 * comments: get the Web3Provider url *
-     */
-    ctx.getProvider = function(){
-		let _this = this;
-		
-	 	if(!_this.projectId && typeof (process.env.INFURA_PROJECTID) !=='string'){
-			console.log('No Infura ProjectId set. program exit.');
-			process.exit(1);
-		}
+	/**
+ 	 * comments: get the Web3Provider url *
+   */
+  ctx.getProvider = function() {
+    let _this = this;
+	
+   	if(!_this.projectId && typeof (process.env.INFURA_PROJECTID) !=='string')
+    {
+  		console.log('No Infura ProjectId set. program exit.');
+  		return;
+  	}
 
-   		switch(_this.protocol){
-   			case 'https':
-   				return 'https://'+_this.netmode +'.' + _this.domain +
-   				'/' + _this.version +'/'+_this.projectId;
-   			case 'wss':
-   				return 'wss://'+_this.netmode +'.' + _this.domain +
-   				'/ws/' + _this.version +'/'+_this.projectId;
-   			case 'ipfs':
-   				return 'https://'+_this.netmode +'.' + _this.domain +
-   				'/ipfs/';
-   			default:
-   				return 'https://'+_this.netmode +'.' + _this.domain +
-   				'/' + _this.version +'/'+_this.projectId;
-   		}
-    }
+ 		switch(_this.protocol){
+ 			case 'https':
+ 				return 'https://'+_this.netmode +'.' + _this.domain +
+ 				'/' + _this.version +'/'+_this.projectId;
+ 			case 'wss':
+ 				return 'wss://'+_this.netmode +'.' + _this.domain +
+ 				'/ws/' + _this.version +'/'+_this.projectId;
+ 			case 'ipfs':
+ 				return 'https://'+_this.netmode +'.' + _this.domain +
+ 				'/ipfs/';
+ 			default:
+ 				return 'https://'+_this.netmode +'.' + _this.domain +
+ 				'/' + _this.version +'/'+_this.projectId;
+ 		}
+  }
 
-   	if(process.env && 
-   		typeof process.env.INFURA_PROJECTID === 'string'){
-   		ctx.projectId = process.env.INFURA_PROJECTID;
-   	}
+ 	if(process.env && 
+ 		typeof process.env.INFURA_PROJECTID === 'string')
+  {
+ 		ctx.projectId = process.env.INFURA_PROJECTID;
+ 	}
 
 	if(typeof options === 'string'){
 		ctx.netmode = _getNetmode(options);
@@ -97,8 +99,10 @@ function InfuraHandler(options) {
 		if(options['projectId'] && typeof (options['projectId']) ==='string'){
 			ctx.projectId = options['projectId'];
 		}
+		if(options['secret'] && typeof(options['secret'])  === 'string'){
+			ctx.secret = options['secret'];
+		}
 	}
-
 
 	return ctx;
 }

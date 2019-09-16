@@ -16,3 +16,6 @@
 > If you modified the demo contracts file,you need mix contracts abi,used command : npm run demo-mix
 
 
+
+## run demo 
+> npm start
