@@ -16,36 +16,37 @@
 			<h1 class="section-title">Demo</h1>
 		</div>
 	</div>
-	
-	<section class="balance-section" id="balance-section">
+	<section class="header-info">
 		<div class="container">
-			<div class="justify-content-center">
-				<div class="form-group row">
-					<label for="network" class="form-label col-2">Connected To</label>
-					<input type="text" class="form-control-plaintext col-4" readonly="readonly" name="network" value="">
-					<label for="gasPrice" class="form-label col-2">Gas Price</label>
-					<input type="text" name="gasPrice" class="form-control-plaintext col-4" readonly="readonly" value="0.00">					
+			<form class="form">
+				<div class="row justify-content-center align-items-center" >
+					<label for="network" class="form-label col-3">Connected To</label>
+					<input type="text" class="form-control-plaintext col-3 text-danger" readonly="readonly" name="network" value="">
+					<label for="gasPrice" class="form-label col-3">Gas Price</label>
+					<input type="text" name="gasPrice" class="form-control-plaintext col-3" readonly="readonly" value="0.00">					
 				</div>					
-			</div>
-							
-			<form action="#" class="form-row">
-				
+			</form>			
+		</div>
+	</section>
+	<section class="balance-section" id="balance-section">
+		<div class="container">						
+			<form action="#" class="form-row">			
 				<div class="form-group col-6">
 					<label for="accountAddress " class="form-label">Address</label>
+					<span class="accountAddress pl-2 text-warning d-none">please input account address</span>
 					<input class="form-control" type="text" name="accountAddress" id="accountAddress" value="0xab09">
 				</div>
 				<div class="form-group col-6">
 					<label class="form-label" for="accountBalance">balance</label>
-					<input class="form-control-plaintext" type="text" name="accountBalance"
+					<input class="form-control-plaintext" type="text" name="accountBalance" readonly="readonly" 
 					value="0.00">
 				</div>	
 				<div class="form-group col-11">
 					<div class="float-right">
-						<button class="btn btn-outline-secondary">query</button>
+						<button class="btn btn-outline-secondary accountBalanceBtn">query</button>
 					</div>					
 				</div>						
-			</form>
-		
+			</form>		
 		</div>
 	</section>
 
@@ -55,7 +56,7 @@
 			<form action="#">
 				<div class="form-group row">
 					<label class="col-4 col-form-label text-center" for="">Contract Address</label>
-					<input class="col-8 form-control-plaintext" value="0xaBw"></input>
+					<input class="col-8 form-control-plaintext " value=""></input>
 				</div>
 				<div class="form-group row">
 					<label class="col-4 col-form-label text-center" for="transactionId">Transaction ID</label>

@@ -24,6 +24,8 @@ function SdkError(code,message,type){
 
 SdkError.ErrorCode = [
 	{"code":"100000",message:"need metamask support."},
+	{"code":"700001",message:"Ajax Get Json Error.",type:"error"},
+	{"code":"900001","message":"SDK init Error.",type:"error"},
 	{"code":"999999",message:"unknow error."}
 ];
 

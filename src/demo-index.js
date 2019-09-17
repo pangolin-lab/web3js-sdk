@@ -12,8 +12,8 @@
  */
 'use strict';
 var jquery = require('jquery');
-
 const MetaMaskSdk = require('./lib/metamask-extends.js');
+global.sdkCore = new MetaMaskSdk();
 
 //const SDKCore = require('./sdk-core.js');
 
@@ -28,26 +28,93 @@ const C = {
 
 const PS = {
 	appName:"Web3 SDK Demo",
-	accAddrTagName:"accountAddress"
+	accAddrTagName:"accountAddress",
+	netTagName:"network",
+	gasPriceTagName:"gasPrice",
+	accountBalanceTagName:"accountBalance"
 };
 
 var DemoApp = {
-	sdkCore:null,
 	init:(sdk)=>{
-		DemoApp.sdkCore;
-		console.log('>>>');
-		$('#'+PS.accAddrTagName+'').val(sdkCore.selectAddress);
+		this.sdk = sdk;
+		console.log('>>>CountachToken:',JSON.stringify(sdk.ABIManager.getContract('CountachToken'),null,' '));
+		initPage(sdk);
 		console.log('>>>2');
+		//
+		bindingOperator(sdk);
 	}
+
 }
 
+function initPage(sdk){
+		$('#'+PS.accAddrTagName+'').val(sdk.selectAddress);
+		let netName = sdk.getNetwork() ? sdk.getNetwork().name : 'Unknown';
+		$('input[name='+PS.netTagName+']').val(netName);	
+		let w3 = sdk.web3;
+		w3.eth.getGasPrice().then((price)=>{
+			let gasEth = w3.utils.fromWei(price,'ether');
+			console.log(w3.utils.fromWei(price,'ether'));
+			$('input[name='+PS.gasPriceTagName+']').val(gasEth+' eth');
+		});
 
+		sdk.getBalance('',"ether").then(balance=>{
+			console.log('balance:',balance);
+			$('input[name='+PS.accountBalanceTagName+']').val(balance+' eth');
+		});
+		
+
+		if(sdk.ethereum){
+			sdk.ethereum.on('accountsChanged',(accounts)=>{
+				console.log("Account changed.", accounts);
+				sdk.selectAddress = accounts[0];
+				$('#'+PS.accAddrTagName+'').val(sdk.selectAddress);
+
+				sdk.getBalance('',"ether").then(balance=>{
+					console.log('balance:',balance);
+					$('input[name='+PS.accountBalanceTagName+']').val(balance+' eth');
+				});
+			});
+		}
+
+		// let CTWeb3Contract =await sdk.getWeb3Contract('CountachToken');
+		// if(CTWeb3Contract)global.CountachTokenWeb3Contract = CTWeb3Contract;
+		//	
+}
+
+function getBalance(address){
+
+}
+
+/**
+ *
+ */
+function bindingOperator(sdk){
+	$('.accountBalanceBtn').on('click',function(e){
+
+		let acc = $('#'+PS.accAddrTagName+'').val();
+		if(!acc){
+			$('span.accountAddress').removeClass('d-none');
+			return;
+		}else{
+			$('span.accountAddress').addClass('d-none');
+		}
+		sdk.getBalance(acc,"ether").then(balance=>{
+			console.log('balance:',balance);
+			$('input[name='+PS.accountBalanceTagName+']').val(balance+' eth');
+		});
+		e.stopPropagation();
+		return false;
+	});
+}
 
 
 
 $(function(){
 	$(window).on('load',function(){
-		let sdkCore = new MetaMaskSdk(DemoApp);
+		sdkCore.init().then(sdk=>{
+			DemoApp.init(sdk);
+		});
+	
 		console.log("SDK Version:",sdkCore.version);
 	});
 });

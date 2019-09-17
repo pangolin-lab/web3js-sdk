@@ -33,10 +33,10 @@ class ContractsManager{
 	}
 
 	setContractsAddress(id,address){
-		let abis = this.contracts;
-		if(id in this.contracts){
-			console.log('Update'+id+' Adress:',this.contracts[id]['address'],' to ',address);
-			this.contracts[id]['address']=address;
+		let abis = this.contracts ||{};
+		if(id in abis){
+			console.log('Update'+id+' Adress:',abis[id]['address'],' to ',address);
+			abis[id]['address']=address;
 		}
 	}
 
